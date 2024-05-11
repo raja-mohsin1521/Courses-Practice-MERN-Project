@@ -1,5 +1,6 @@
 const home = (req, res)=>{
     try{
+        
         res.status(200).send('My First Router ');
     }
     catch(error){
@@ -8,7 +9,8 @@ console.log(error)
 }
 const register =(req, res)=>{
     try{
-        res.status(200).send('Register Page');
+        console.log(req.body)
+        res.status(200).send({message:req.body});
     }
     catch(error){
 console.log(error)
