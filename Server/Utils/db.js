@@ -1,5 +1,5 @@
 const mongose= require('mongoose');
-const uri='mongodb://localhost:27017';
+const uri='mongodb://localhost:27017/Mern';
 
 
 const connect=async()=>{
