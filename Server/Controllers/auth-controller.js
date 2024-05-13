@@ -25,9 +25,9 @@ const register =async(req, res)=>{
         else{
             var salt = bcrypt.genSaltSync(10);
             var hashpassword = await bcrypt.hashSync(password, salt);
-            await userModel.create({username,email,phone,password:hashpassword,isAdmin})
+          const userCreated=  await userModel.create({username,email,phone,password:hashpassword,isAdmin})
             console.log('Done')
-        res.status(200).send({message:req.body});
+        res.status(200).json({message:req.body, token:await userCreated.generateToken()});
         }
       
        
