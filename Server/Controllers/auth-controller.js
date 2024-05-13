@@ -37,4 +37,13 @@ const register =async(req, res)=>{
 console.log(error)
     }
 }
-module.exports= {home,register};
+const about= (req, res)=>{
+    try{
+        
+        res.status(200).send('My About ');
+    }
+    catch(error){
+console.log(error)
+    }
+}
+module.exports= {home,register,about};
