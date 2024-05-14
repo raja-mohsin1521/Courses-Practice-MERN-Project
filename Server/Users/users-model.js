@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
 });
 const JWT_SECRATE_Key='abcd';
 // Create the User model
-const User = mongoose.model("User", userSchema);
+
 userSchema.methods.generateToken=async function(){
 try{
 return jwt.sign({
@@ -47,5 +47,5 @@ catch(error){
     console.log(error)
 }
 }
-
+const User = mongoose.model("User", userSchema);
 module.exports = User;
