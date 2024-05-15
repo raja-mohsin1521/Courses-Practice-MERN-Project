@@ -11,6 +11,20 @@ const home = (req, res)=>{
 console.log(error)
     }
 }
+
+const about= (req, res)=>{
+    try{
+        
+        res.status(200).send('My About ');
+    }
+    catch(error){
+console.log(error)
+    }
+}
+
+
+
+
 const register =async(req, res)=>{
     
     try{
@@ -38,13 +52,33 @@ const register =async(req, res)=>{
 console.log(error)
     }
 }
-const about= (req, res)=>{
-    try{
-        
-        res.status(200).send('My About ');
-    }
-    catch(error){
-console.log(error)
+
+
+
+const login = async (req, res) => {
+    try {
+        const { email, password, isAdmin } = req.body;
+        const userExist = await userModel.findOne({ email });
+        console.log(req.body);
+
+        if (!userExist) {
+            return res.status(200).json({ message: 'Invalid Credentials' });
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, userExist.password);
+
+        if (isPasswordValid) {
+            console.log('Login Successful');
+            const token = await userExist.generateToken();
+            return res.status(200).json({ message: 'Login Successful', token });
+        } else {
+            return res.status(200).json({ message: 'Invalid Password' });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Server Error');
     }
 }
-module.exports= {home,register,about};
+
+
+module.exports= {home,register,about,login};
