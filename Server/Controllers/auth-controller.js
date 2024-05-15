@@ -68,10 +68,18 @@ const login = async (req, res) => {
         const isPasswordValid = await bcrypt.compare(password, userExist.password);
 
         if (isPasswordValid) {
+            if(userExist.isAdmin){
+                console.log('Login Successfully as adimin');
+                const token = await userExist.generateToken();
+                return res.status(200).json({ message: 'Login Successfully as admin', token });
+            }
+          else{
             console.log('Login Successful');
             const token = await userExist.generateToken();
-            return res.status(200).json({ message: 'Login Successful', token });
-        } else {
+            return res.status(200).json({ message: 'Login Successful ', token });
+          }
+        }
+         else {
             return res.status(200).json({ message: 'Invalid Password' });
         }
     } catch (error) {
