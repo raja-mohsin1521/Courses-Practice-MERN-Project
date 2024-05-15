@@ -1,4 +1,5 @@
 const userModel=require('../Users/users-model')
+const contactModel=require('../Users/contact-model')
 var bcrypt = require('bcryptjs');
 
 
@@ -87,6 +88,17 @@ const login = async (req, res) => {
         res.status(500).send('Server Error');
     }
 }
+const contact=async (req,res)=>{
+try {
+const {email,phone,message}=req.body
+const sendMessage=await contactModel.create({email,phone,message})
+res.status(200).json({
+    messsage:'Message Sent'
+})
+}
+catch(error){
+    next(error)
+}
+}
 
-
-module.exports= {home,register,about,login};
+module.exports= {home,register,about,login,contact};

@@ -9,5 +9,6 @@ const mainRoutes = require("../Controllers/auth-controller");
 router.route("/").get(mainRoutes.home);
 router.route("/register").post(mainRoutes.register);
 router.route("/login").post(mainRoutes.login);
+router.route("/contact").post(mainRoutes.contact);
 router.route("/about").get(mainRoutes.about);
 module.exports = router;
