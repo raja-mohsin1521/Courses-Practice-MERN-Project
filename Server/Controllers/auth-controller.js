@@ -97,7 +97,7 @@ res.status(200).json({
 })
 }
 catch(error){
-    next(error)
+   console.log('error')
 }
 }
 
