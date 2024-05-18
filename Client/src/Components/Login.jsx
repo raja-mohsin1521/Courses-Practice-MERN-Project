@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
 
-function Signup() {
+function Login() {
   const [data, setData] = useState({
-    username: '',
+    
     email: '',
-    phone: '',
+    
     password: '',
-    isAdmin: false
+   
   });
 
   function handleChange(event) {
-    const { name, value,checked,type } = event.target;
+    const { name, value } = event.target;
     setData(prevData => ({
       ...prevData,
-      [name]: type === 'checkbox' ? checked : value
+      [name]:value
     }));
   }
 
@@ -24,7 +24,7 @@ function Signup() {
     console.log("Submitting Form with data:", data);  // Debugging line
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/register', {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -41,34 +41,20 @@ function Signup() {
 
   return (
     <>
-      <SignupPage>
+      <LoginPage>
         <Container fluid>
-          <Row>
+          <Row className='text-end'> 
             <Col className='mt-3'>
-              <h1 className='display-4'>Sign Up</h1>
+              <h1 className='display-4'>Login</h1>
             </Col>
           </Row>
 
           <Row className='mt-3'>
-            <Col sm={12} md={6}>
-              <div className='image'>
-                <Image src='/contactus.jpg' className='my-5 img' fluid />
-              </div>
-            </Col>
-            <Col sm={12} md={6}>
+            
+            <Col sm={12} md={6} className='mt-5 pt-5'>
               <div className="form">
                 <Form onSubmit={submitForm}>
-                  <Form.Group className='mt-3' controlId="formUserName">
-                    <Form.Label className="label">User Name:</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="username"
-                      placeholder="Enter User Name"
-                      onChange={handleChange}
-                      value={data.username}
-                      required
-                    />
-                  </Form.Group>
+                  
                   <Form.Group className='mt-3' controlId="formEmail">
                     <Form.Label className="label">Email address</Form.Label>
                     <Form.Control
@@ -80,17 +66,7 @@ function Signup() {
                       required
                     />
                   </Form.Group>
-                  <Form.Group className='mt-3' controlId="formPhone">
-                    <Form.Label className="label">Phone</Form.Label>
-                    <Form.Control
-                      type="tel"
-                      name="phone"
-                      placeholder="Enter phone"
-                      onChange={handleChange}
-                      value={data.phone}
-                      required
-                    />
-                  </Form.Group>
+                  
                   <Form.Group className='mt-3' controlId="formPassword">
                     <Form.Label className="label">Password</Form.Label>
                     <Form.Control
@@ -102,22 +78,26 @@ function Signup() {
                       required
                     />
                   </Form.Group>
-                <input type="checkbox" name="isAdmin"  className='mt-3 p-5' id=""  onChange={handleChange}
-                      value={data.isAdmin} />&nbsp;<b>Admin</b><br />
+               
                   <Button variant="primary" className='mt-3' type="submit">
-                    Send
+                    Login
                   </Button>
                 </Form>
               </div>
             </Col>
+            <Col sm={12} md={6}>
+              <div className='image'>
+                <Image src='/contactus.jpg' className='my-5 img' fluid />
+              </div>
+            </Col>
           </Row>
         </Container>
-      </SignupPage>
+      </LoginPage>
     </>
   );
 }
 
-const SignupPage = styled.div`
+const LoginPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -132,14 +112,14 @@ const SignupPage = styled.div`
   }
   .display-4 {
     font-family: 'Times New Roman', Times, serif;
-    margin-left: 50px;
+    margin-right: 50px;
   }
   .img {
     height: 50vh;
   }
   .image {
-    margin-left: 50px;
+    margin-right: 50px;
   }
 `;
 
-export default Signup;
+export default Login;

@@ -8,6 +8,7 @@ import Contact from './Components/Contact';
 import Home from './Components/Home';
 import Signup from './Components/Signup';
 import Navbar from './Components/Navbar';
+import Login from './Components/Login';
 function App() {
   const router = createBrowserRouter([
     {
@@ -22,7 +23,10 @@ function App() {
       path: "/signup",
       element: <><Navbar/><Signup/></>,
     },
-   
+    {
+      path: "/login",
+      element: <><Navbar/><Login/></>,
+    },
   ]);
 
   return (
