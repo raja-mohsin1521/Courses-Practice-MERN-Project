@@ -35,7 +35,7 @@ const register =async(req, res)=>{
      
        
         if(userExist){
-            console.log('User Exists')
+            res.status(200).json({ message: 'User Exist '  })
         }
         else{
             var salt = bcrypt.genSaltSync(10);
@@ -43,7 +43,7 @@ const register =async(req, res)=>{
           const userCreated=  await userModel.create({username,email,phone,password:hashpassword,isAdmin})
             console.log('Done')
             const token = await userCreated.generateToken(); // Call generateToken on userCreated
-            res.status(200).json({ message: req.body, token });
+            res.status(200).json({ message: 'Signup Succesfull', token });
         }
       
        

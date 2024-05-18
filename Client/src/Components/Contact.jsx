@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
-import { Form, Button, Container, Row, Col,Image } from 'react-bootstrap'
-import styled from 'styled-components'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import React, { useState } from 'react';
+import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
+import styled from 'styled-components';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Contact() {
   const [data, setData] = useState({
     email: "",
     phone: "",
     message: ""
-  })
+  });
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setData(prevData => ({
+    console.log("Handle Change:", name, value);  // Debugging line
+    setData((prevData) => ({
       ...prevData,
       [name]: value
     }));
@@ -20,7 +21,8 @@ function Contact() {
 
   async function submitForm(event) {
     event.preventDefault();
-  
+    console.log("Submitting Form with data:", data);  // Debugging line
+
     try {
       const response = await fetch('http://localhost:5000/api/auth/contact', {
         method: 'POST',
@@ -29,36 +31,33 @@ function Contact() {
         },
         body: JSON.stringify(data)
       });
-  
-      
-  
+
       const result = await response.json();
       console.log('Success:', result);
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
   }
-  
 
   return (
     <ContactPage>
       <Container fluid>
-<Row>
-  <Col className='mt-3'>
-  <h1 className='display-4' >Contact Us</h1>
-  </Col>
-</Row>
+        <Row>
+          <Col className='mt-3'>
+            <h1 className='display-4'>Contact Us</h1>
+          </Col>
+        </Row>
 
-        <Row className='mt-3'>
+        <Row className="mt-3">
           <Col sm={12} md={6}>
-            <div className='image'>
-             <Image src='/contactus.jpg' className='my-5 img' fluid/>
+            <div className="image">
+              <Image src="/contactus.jpg" className="my-5 img" fluid />
             </div>
           </Col>
           <Col sm={12} md={6}>
             <div className="form">
               <Form onSubmit={submitForm}>
-                <Form.Group className='mt-3' controlId="formEmail">
+                <Form.Group className="mt-3" controlId="formEmail">
                   <Form.Label className="label">Email address</Form.Label>
                   <Form.Control
                     type="email"
@@ -69,7 +68,7 @@ function Contact() {
                     required
                   />
                 </Form.Group>
-                <Form.Group className='mt-3' controlId="formPhone">
+                <Form.Group className="mt-3" controlId="formPhone">
                   <Form.Label className="label">Phone</Form.Label>
                   <Form.Control
                     type="tel"
@@ -80,7 +79,7 @@ function Contact() {
                     required
                   />
                 </Form.Group>
-                <Form.Group className='mt-3' controlId="formMessage">
+                <Form.Group className="mt-3" controlId="formMessage">
                   <Form.Label className="label">Message</Form.Label>
                   <Form.Control
                     as="textarea"
@@ -92,7 +91,7 @@ function Contact() {
                     required
                   />
                 </Form.Group>
-                <Button variant="primary" className='mt-3' type="submit">
+                <Button variant="primary" className="mt-3" type="submit">
                   Send
                 </Button>
               </Form>
@@ -101,7 +100,7 @@ function Contact() {
         </Row>
       </Container>
     </ContactPage>
-  )
+  );
 }
 
 const ContactPage = styled.div`
@@ -114,20 +113,19 @@ const ContactPage = styled.div`
     margin-top: 20px;
     width: 80%;
   }
-  .label{
+  .label {
     font-weight: bold;
-  
   }
-  .display-4{
+  .display-4 {
     font-family: 'Times New Roman', Times, serif;
     margin-left: 50px;
   }
-  .img{
+  .img {
     height: 50vh;
   }
-  .image{
+  .image {
     margin-left: 50px;
   }
-`
+`;
 
-export default Contact
+export default Contact;
