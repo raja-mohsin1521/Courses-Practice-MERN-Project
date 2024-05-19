@@ -77,7 +77,8 @@ const login = async (req, res) => {
           else{
             console.log('Login Successful');
             const token = await userExist.generateToken();
-            return res.status(200).json({ message: 'Login Successful ', token });
+            const userId = await userExist._id;
+            return res.status(200).json({ message: 'Login Successful ', token,userId });
           }
         }
          else {

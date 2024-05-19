@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Store/auth';
 
 function Login() {
   const [data, setData] = useState({
@@ -10,7 +12,8 @@ function Login() {
     password: '',
    
   });
-
+const navigate=useNavigate()
+const storeToken=useAuth()
   function handleChange(event) {
     const { name, value } = event.target;
     setData(prevData => ({
@@ -33,6 +36,7 @@ function Login() {
       });
 
       const result = await response.json();
+    storeToken(result.token)
       alert(result.message);
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
