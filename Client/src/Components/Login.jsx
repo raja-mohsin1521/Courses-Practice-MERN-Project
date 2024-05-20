@@ -36,8 +36,16 @@ const storeToken=useAuth()
       });
 
       const result = await response.json();
+
     storeToken(result.token)
       alert(result.message);
+      if(result.message=='Invalid Credentials'||result.message=="Invalid Password"){
+        navigate('/login')
+      }
+      else{
+        navigate('/')
+      }
+      
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }

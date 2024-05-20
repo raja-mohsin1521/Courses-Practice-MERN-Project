@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
 
 function Contact() {
   const [data, setData] = useState({
@@ -19,6 +20,7 @@ function Contact() {
     }));
   }
 
+  const navigate=useNavigate();
   async function submitForm(event) {
     event.preventDefault();
     console.log("Submitting Form with data:", data);  // Debugging line
@@ -34,6 +36,7 @@ function Contact() {
 
       const result = await response.json();
       console.log('Success:', result);
+      navigate('/')
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }

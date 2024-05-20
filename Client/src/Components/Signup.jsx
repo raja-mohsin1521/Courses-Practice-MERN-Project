@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
   const [data, setData] = useState({
@@ -18,11 +19,11 @@ function Signup() {
       [name]: type === 'checkbox' ? checked : value
     }));
   }
-
+  const navigate=useNavigate();
   async function submitForm(event) {
     event.preventDefault();
     console.log("Submitting Form with data:", data);  // Debugging line
-
+    
     try {
       const response = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
@@ -34,6 +35,7 @@ function Signup() {
 
       const result = await response.json();
       alert(result.message);
+      navigate('/')
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
