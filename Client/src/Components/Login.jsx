@@ -13,7 +13,7 @@ function Login() {
    
   });
 const navigate=useNavigate()
-const storeToken=useAuth()
+const {storeToken}=useAuth()
   function handleChange(event) {
     const { name, value } = event.target;
     setData(prevData => ({
@@ -39,7 +39,7 @@ const storeToken=useAuth()
 
     storeToken(result.token)
       alert(result.message);
-      if(result.message=='Invalid Credentials'||result.message=="Invalid Password"){
+      if(result.message=='Invalid Credentials'||result.message=="Invalid Password "){
         navigate('/login')
       }
       else{

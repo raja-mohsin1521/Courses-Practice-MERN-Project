@@ -9,6 +9,7 @@ import Home from './Components/Home';
 import Signup from './Components/Signup';
 import Navbar from './Components/Navbar';
 import Login from './Components/Login';
+import Logout from './Components/Logout';
 function App() {
   const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ function App() {
     {
       path: "/login",
       element: <><Navbar/><Login/></>,
+    },
+    {
+      path: "/logout",
+      element: <><Navbar/><Logout/></>,
     },
   ]);
 
